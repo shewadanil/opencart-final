@@ -1,0 +1,130 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+            <div class="col-sm-10">
+              <select name="module_tradeevo_status" id="input-status" class="form-control">
+                {% if module_tradeevo_status %}
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %}
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-tradeevo-public-key">{{ text_public_key }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="module_tradeevo_public_key" value="{{ module_tradeevo_public_key }}" placeholder="{{ text_public_key }}" id="input-tradeevo-public-key" class="form-control" />
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-tradeevo-private-key">{{ text_private_key }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="module_tradeevo_private_key" value="{{ module_tradeevo_private_key }}" placeholder="{{ text_private_key }}" id="input-tradeevo-private-key" class="form-control" />
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-success_order_status_id">{{ text_success_order_status_id }}</label>
+            <div class="col-sm-10">
+              <select name="module_tradeevo_success_order_status_id" id="input-success_order_status_id" class="form-control">
+                {% for order_status in order_statuses %}
+                		{% if order_status.order_status_id == module_tradeevo_success_order_status_id %}
+                			<option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
+                		{% else %}
+                			<option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
+                		{% endif %}
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-fail_order_status_id">{{ text_fail_order_status_id }}</label>
+            <div class="col-sm-10">
+              <select name="module_tradeevo_fail_order_status_id" id="input-fail_order_status_id" class="form-control">
+                {% for order_status in order_statuses %}
+                		{% if order_status.order_status_id == module_tradeevo_fail_order_status_id %}
+                			<option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
+                		{% else %}
+                			<option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
+                		{% endif %}
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label">{{ text_categories_feed }}</label>
+            <div class="col-sm-10" >
+            		<a href="{{ categories_feed }}" style="display:block;padding:10px 0;" target="_blank">{{ categories_feed }}</a>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label">{{ text_products_feed }}</label>
+            <div class="col-sm-10" >
+            		<a href="{{ products_feed }}" style="display:block;padding:10px 0;" target="_blank">{{ products_feed }}</a>
+            		<div style="color:gray;font-size:12px;">{{ text_products_feed_help }}</div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label">{{ text_orders_feed }}</label>
+            <div class="col-sm-10" >
+            		<a href="{{ orders_feed }}" style="display:block;padding:10px 0;" target="_blank">{{ orders_feed }}</a>
+            		<div style="color:gray;font-size:12px;">{{ text_orders_feed_help }}</div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label">{{ text_set_products_feed }}</label>
+            <div class="col-sm-10" >
+            		<a href="{{ set_products_feed }}" style="display:block;padding:10px 0;" target="_blank">{{ set_products_feed }}</a>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label">{{ text_set_orders_feed }}</label>
+            <div class="col-sm-10" >
+            		<a href="{{ set_orders_feed }}" style="display:block;padding:10px 0;" target="_blank">{{ set_orders_feed }}</a>
+            </div>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }}
